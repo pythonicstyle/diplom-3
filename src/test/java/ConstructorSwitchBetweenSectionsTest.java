@@ -11,14 +11,14 @@ import pom.BurgerMainPage;
 import rules.BrowserRule;
 
 @RunWith(Parameterized.class)
-public class ConstructorSwitchTest {
+public class ConstructorSwitchBetweenSectionsTest {
     private final By header;
     private final By section;
 
     @Rule
     public BrowserRule browserRule = new BrowserRule();
 
-    public ConstructorSwitchTest(By header, By section) {
+    public ConstructorSwitchBetweenSectionsTest(By header, By section) {
         this.header = header;
         this.section = section;
     }
@@ -26,17 +26,17 @@ public class ConstructorSwitchTest {
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][] {
-            { SAUCES_HEADER, SAUCES_SECTION },
-            { FILLINGS_HEADER, FILLINGS_SECTION },
-            { BUNS_HEADER, BUNS_SECTION },
+            { saucesHeader, saucesSectionLocator },
+            { fillingsHeader, fillingsSectionLocator },
+            { bunsHeader, bunsSectionLocator },
         };
     }
 
     @Test
-    @Description("Переход по разделам с ингредиентами")
+    @Description("Скролл по разделам с ингредиентами")
     public void goToProfilePageViaConstructorButtonTest() {
         BurgerMainPage burgerMainPage = new BurgerMainPage(browserRule.getWebDriver());
-        burgerMainPage.clickSaucesHeader(header);
-        Assert.assertTrue(burgerMainPage.checkSaucesSectionIsVisible(section));
+        burgerMainPage.scrollToSection(section);
+        Assert.assertTrue(burgerMainPage.checkIngredientSectionIsVisible(header));
     }
 }
