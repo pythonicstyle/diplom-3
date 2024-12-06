@@ -15,19 +15,19 @@ public class PasswordRecoveryPage {
         this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(3));
     }
 
-    private final By ENTER_BUTTON = By.xpath("//a[@class='Auth_link__1fOlj']");
-    private final By PASSWORD_RECOVERY_HEADER = By.xpath("//h2[contains(text(),'Восстановление пароля')]");
+    private final By enterButton = By.xpath("//a[@class='Auth_link__1fOlj']");
+    private final By recoveryPasswordHeader = By.xpath("//h2[contains(text(),'Восстановление пароля')]");
 
     @Step("Проверка отображения заголовка 'Восстановление пароля'")
     public boolean checkRecoveryPasswordHeaderIsVisible() {
-        WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_RECOVERY_HEADER));
+        WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(recoveryPasswordHeader));
         return logo.isDisplayed();
     }
 
     @Step("Нажатие на кнопку 'Войти' на странице восстановления пароля")
     public void clickEnterButton() {
         if (checkRecoveryPasswordHeaderIsVisible()) {
-            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(ENTER_BUTTON));
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(enterButton));
             button.click();
         }
     }
